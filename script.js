@@ -63,6 +63,247 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* ============================================= */
+    /* POP UP */
+    /* ============================================= */
+    
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImg");
+
+    const modalTag =
+        document.getElementById("modalTag");
+
+    const modalStatus =
+        document.getElementById("modalStatus");
+
+    const modalTitle =
+        document.getElementById("modalTitle");
+
+    const modalDesc =
+        document.getElementById("modalDesc");
+
+    const modalTech =
+        document.getElementById("modalTech");
+
+    const images =
+        document.querySelectorAll(".popup-image");
+
+    const modalProjectLink =
+        document.getElementById("modalProjectLink");
+
+    const modalYear =
+        document.getElementById("modalYear");
+
+    const modalType =
+        document.getElementById("modalType");
+
+    const modalStack =
+        document.getElementById("modalStack");
+
+    const closeBtn =
+        document.querySelector(".close-modal");
+
+
+    images.forEach(img => {
+
+        img.addEventListener("click", () => {
+
+            const card =
+                img.closest(".project-card");
+
+            const tag =
+                card.querySelector(".project-tag")
+                .textContent
+                .trim();
+
+            const title =
+                card.querySelector("h3")
+                .textContent
+                .trim();
+
+            const desc =
+                card.querySelector(".project-content p")
+                .textContent
+                .trim();
+            
+            const projectLink =
+                card.querySelector(
+                    ".project-link"
+                );
+
+            const projectYear =
+                card.querySelector(
+                    ".project-year"
+                );
+
+            const projectType =
+                card.querySelector(
+                    ".project-type"
+                );
+
+            const techs =
+                card.querySelectorAll(
+                    ".project-tech span"
+                );
+
+                const statusElement =
+                    card.querySelector(
+                        ".project-status"
+                    );
+
+                if(statusElement){
+
+                    modalStatus.textContent =
+                        statusElement.textContent;
+
+                    modalStatus.className = "modal-status";
+
+                    if(statusElement.classList.contains("completed")){
+                        modalStatus.classList.add("completed");
+                    }
+
+                    if(statusElement.classList.contains("ongoing")){
+                        modalStatus.classList.add("ongoing");
+                    }
+
+                    if(statusElement.classList.contains("planning")){
+                        modalStatus.classList.add("planning");
+                    }
+
+                }
+                if(projectLink){
+
+                    const url =
+                        projectLink.textContent.trim();
+
+                    if(
+                        url === "#" ||
+                        url === "" ||
+                        url === "Coming Soon"
+                    ){
+
+                        modalProjectLink.href = "#";
+
+                        modalProjectLink.innerHTML = `
+                            <i class="fa-solid fa-clock"></i>
+                            Coming Soon
+                        `;
+
+                        modalProjectLink.style.opacity = ".7";
+
+                        modalProjectLink.style.pointerEvents =
+                            "none";
+
+                    }
+                    else{
+
+                        modalProjectLink.href = url;
+
+                        modalProjectLink.innerHTML = `
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            Visit Project
+                        `;
+
+                        modalProjectLink.style.opacity = "1";
+
+                        modalProjectLink.style.pointerEvents =
+                            "auto";
+
+                    }
+
+                }
+
+            modalTag.textContent = tag;
+
+            modalTitle.textContent = title;
+
+            modalDesc.textContent = desc;
+
+            modalTech.innerHTML = "";
+
+            techs.forEach(tech => {
+
+                const span =
+                    document.createElement("span");
+
+                span.textContent =
+                    tech.textContent;
+
+                modalTech.appendChild(span);
+
+            });
+
+            modalImg.src = img.src;
+
+            if(projectYear){
+
+                modalYear.textContent =
+                    projectYear.textContent.trim();
+
+            }
+
+            if(projectType){
+
+                modalType.textContent =
+                    projectType.textContent.trim();
+
+            }
+
+            modalStack.textContent =
+                Array.from(techs)
+                    .map(tech => tech.textContent.trim())
+                    .join(", ");
+
+            modal.classList.add("show");
+
+            document.body.style.overflow =
+                "hidden";
+
+        });
+
+    });
+
+
+    closeBtn.addEventListener("click", () => {
+
+        modal.classList.remove("show");
+
+        document.body.style.overflow =
+            "auto";
+
+    });
+
+
+    modal.addEventListener("click", (e) => {
+
+        if(e.target === modal){
+
+            modal.classList.remove("show");
+
+            document.body.style.overflow =
+                "auto";
+
+        }
+
+    });
+
+
+    document.addEventListener(
+        "keydown",
+        (e) => {
+
+            if(e.key === "Escape"){
+
+                modal.classList.remove("show");
+
+                document.body.style.overflow =
+                    "auto";
+
+            }
+
+        }
+    );
+
+    /* ============================================= */
     /* HERO FLOATING ANIMATION */
     /* ============================================= */
 
@@ -146,6 +387,190 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", revealOnScroll);
 
     revealOnScroll();
+
+    
+    /* ============================================= */
+    /* AWARD EFFECT */
+    /* ============================================= */
+
+    const data = {
+
+        award_ml:{
+            image:"assets/achievements/immo.png",
+            title:"Mythical Immortal Competitive Excellence",
+            latin:"双子座",
+            desc:"Awarded for demonstrating outstanding leadership, tactical awareness, resource management, conflict resolution, and high-pressure decision-making capabilities, culminating in the attainment of Mythical Immortal rank within the Mobile Legends competitive ecosystem.",
+            date:"11 June 2026"
+        },
+
+        award1:{
+            image:"assets/achievements/navi.png",
+            title:"NAVI Esports Community Editing Finalist",
+            latin:"水瓶座",
+            desc:"Recognized as one of the Top 6 finalists in Team Navi's community editing competition, demonstrating creativity, visual storytelling, and advanced editing skills among numerous participants.",
+            date:"5 February 2026"
+        },
+
+        award2:{
+            image:"assets/achievements/discord.png",
+            title:"Founder of a Growing Discord Community",
+            latin:"乙女座",
+            desc:"Founded and developed a Discord community that grew to hundreds of active members, fostering engagement through events, moderation, and community-driven activities.",
+            date:"10 September 2025"
+        },
+
+        award3:{
+            image:"assets/achievements/jungojam.png",
+            title:"Top 7 Lucky Winner",
+            latin:"牡牛座",
+            desc:"Recognized as one of the Top 7 Lucky Winners in JungoJam's community event, earning a place among distinguished participants through active involvement and contribution within the game's creative ecosystem.",
+            date:"25 April 2025"
+        },
+
+        award4:{
+            image:"assets/achievements/tiktok.png",
+            title:"Content Growth Creator",
+            latin:"水瓶座",
+            desc:"Successfully built a TikTok presence with over 10,000 followers through consistent content creation, audience engagement, and organic growth strategies.",
+            date:"1 Februari 2022"
+        },
+
+         award5:{
+            image:"assets/achievements/sma.png",
+            title:"Excellence in Academic Performance",
+            latin:"双子座",
+            desc:"Maintained outstanding academic performance throughout senior high school, consistently earning top rankings and demonstrating dedication to continuous learning.",
+            date:"15 June 2022"
+        }
+
+    };
+
+    const items =
+    document.querySelectorAll(
+    ".archive-item,.preview-card"
+    );
+
+    items.forEach(item=>{
+
+        item.addEventListener("click",()=>{
+
+            const id =
+            item.dataset.id;
+
+            document
+            .querySelectorAll(".archive-item")
+            .forEach(el=>
+                el.classList.remove("active")
+            );
+
+            document
+            .querySelectorAll(".preview-card")
+            .forEach(el=>
+                el.classList.remove("active")
+            );
+
+            document
+            .querySelector(
+                `.archive-item[data-id="${id}"]`
+            )
+            .classList.add("active");
+
+            document
+            .querySelector(
+                `.preview-card[data-id="${id}"]`
+            )
+            .classList.add("active");
+
+            document
+            .getElementById(
+                "main-award-image"
+            )
+            .src = data[id].image;
+
+            document
+            .getElementById(
+                "award-title"
+            )
+            .innerText = data[id].title;
+
+            document.getElementById(
+                "award-latin"
+            ).textContent =
+                data[id].latin;
+
+            document
+            .getElementById(
+                "award-desc"
+            )
+            .innerText = data[id].desc;
+
+            document
+            .getElementById(
+                "award-date"
+            )
+            .innerText = data[id].date;
+
+            document
+            .getElementById(
+                "archive-background"
+            )
+            .style.backgroundImage =
+            `url('${data[id].image}')`;
+        });
+
+    });
+
+    /* ============================================= */
+    /* AWARDS MODAL */
+    /* ============================================= */
+
+    const mainAwardImage =
+    document.getElementById(
+        "main-award-image"
+    );
+
+    const awardsModal =
+    document.getElementById(
+        "awardsModal"
+    );
+
+    const awardsModalImage =
+    document.getElementById(
+        "awardsModalImage"
+    );
+
+    const closeAwardsModal =
+    document.getElementById(
+        "closeAwardsModal"
+    );
+
+    mainAwardImage.addEventListener("click",()=>{
+
+        awardsModal.classList.add(
+            "active"
+        );
+
+        awardsModalImage.src =
+        mainAwardImage.src;
+    });
+
+    closeAwardsModal.addEventListener("click",()=>{
+
+        awardsModal.classList.remove(
+            "active"
+        );
+    });
+
+    awardsModal.addEventListener("click",(e)=>{
+
+        if(e.target === awardsModal){
+
+            awardsModal.classList.remove(
+                "active"
+            );
+        }
+
+    });
 
     /* ============================================= */
     /* TYPEWRITER EFFECT */
@@ -455,7 +880,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loader.innerHTML = `
         <div class="loader">
             <div class="loader-circle"></div>
-            <h2>BlueGlow</h2>
+            <h2>Loading Portofolio</h2>
         </div>
     `;
 
@@ -519,3 +944,566 @@ if(themeBtn){
     });
 
 }
+
+const certModal =
+    document.getElementById(
+        "certificateModal"
+    );
+
+const certImg =
+    document.getElementById(
+        "certificateImg"
+    );
+
+document
+.querySelectorAll(
+    ".certificate-popup"
+)
+.forEach(img => {
+
+    img.addEventListener(
+        "click",
+        () => {
+
+            certImg.src =
+                img.src;
+
+            certModal.classList.add(
+                "show"
+            );
+
+        }
+    );
+
+});
+
+const closeCertificate =
+    document.querySelector(
+        ".close-certificate"
+    );
+
+if(closeCertificate){
+
+    closeCertificate.addEventListener(
+        "click",
+        () => {
+
+            certModal.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+}
+
+certModal.addEventListener(
+    "click",
+    (e) => {
+
+        if(e.target === certModal){
+
+            certModal.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+document.addEventListener(
+    "keydown",
+    (e) => {
+
+        if(
+            e.key === "Escape" &&
+            certModal.classList.contains(
+                "show"
+            )
+        ){
+
+            certModal.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+function openLibraryModal(src){
+
+    document.getElementById(
+        "libraryModal"
+    ).classList.add("active");
+
+    document.getElementById(
+        "libraryModalImage"
+    ).src = src;
+}
+
+function closeLibraryModal(){
+
+    document.getElementById(
+        "libraryModal"
+    ).classList.remove("active");
+}
+
+function openActivity(index){
+
+    const item = activities[index];
+
+    document.getElementById("activityImage").src =
+        item.image;
+
+    document.getElementById("activityTitle").textContent =
+        item.title;
+
+    document.getElementById("activityDate").textContent =
+        item.date;
+
+    document.getElementById("activityDescription").textContent =
+        item.desc;
+
+    document.getElementById("activityCategory").textContent =
+        item.category;
+
+    document.getElementById("activityLocation").textContent =
+        item.location;
+
+    document.getElementById("activityPhotographer").textContent =
+        item.photographer;
+
+    document.getElementById("activityDetails").innerHTML =
+        item.details.map(detail =>
+            `<li>${detail}</li>`
+        ).join("");
+
+    document
+        .getElementById("activityModal")
+        .classList.add("show");
+
+    document.body.style.overflow =
+        "hidden";
+
+    document
+        .getElementById("activityModal")
+        .classList.add("show");
+}
+
+/* ============================================= */
+/* ACTIVITY IMAGE VIEWPORT CONTROL */
+/* ============================================= */
+
+let keyboardX = 0;
+let keyboardY = 0;
+
+const activityImageContainer =
+document.querySelector(".activity-image");
+
+const activityImage =
+document.getElementById("activityImage");
+
+function getImageBounds(){
+
+    const imageRect =
+    activityImage.getBoundingClientRect();
+
+    const containerRect =
+    activityImageContainer.getBoundingClientRect();
+
+    return{
+
+        maxX:
+        Math.max(
+            0,
+            (imageRect.width -
+            containerRect.width) / 2
+        ),
+
+        maxY:
+        Math.max(
+            0,
+            (imageRect.height -
+            containerRect.height) / 2
+        )
+
+    };
+
+}
+
+function updateActivityImage(){
+
+    const bounds =
+    getImageBounds();
+
+    keyboardX = Math.max(
+        -bounds.maxX,
+        Math.min(bounds.maxX, keyboardX)
+    );
+
+    keyboardY = Math.max(
+        -bounds.maxY,
+        Math.min(bounds.maxY, keyboardY)
+    );
+
+    activityImage.style.transform =
+    `
+    translate(
+        calc(-50% + ${keyboardX}px),
+        calc(-50% + ${keyboardY}px)
+    )
+    `;
+}
+
+/* ============================================= */
+/* OPEN ACTIVITY */
+/* ============================================= */
+
+function openActivity(index){
+
+    const item = activities[index];
+
+    activityImage.src = item.image;
+
+    document.getElementById("activityTitle").textContent =
+    item.title;
+
+    document.getElementById("activityDate").textContent =
+    item.date;
+
+    document.getElementById("activityDescription").textContent =
+    item.desc;
+
+    document.getElementById("activityCategory").textContent =
+    item.category;
+
+    document.getElementById("activityLocation").textContent =
+    item.location;
+
+    document.getElementById("activityPhotographer").textContent =
+    item.photographer;
+
+    document.getElementById("activityDetails").innerHTML =
+    item.details.map(
+        detail => `<li>${detail}</li>`
+    ).join("");
+
+    keyboardX = 0;
+    keyboardY = 0;
+
+    activityImage.onload = ()=>{
+
+        updateActivityImage();
+
+    };
+
+    document
+    .getElementById("activityModal")
+    .classList.add("show");
+
+    document.body.style.overflow =
+    "hidden";
+
+}
+
+/* ============================================= */
+/* MOUSE CONTROL */
+/* ============================================= */
+
+if(activityImageContainer){
+
+    activityImageContainer.addEventListener(
+        "mousemove",
+        (e)=>{
+
+            const rect =
+            activityImageContainer.getBoundingClientRect();
+
+            const x =
+            (e.clientX - rect.left) /
+            rect.width;
+
+            const y =
+            (e.clientY - rect.top) /
+            rect.height;
+
+            const bounds =
+            getImageBounds();
+
+            keyboardX =
+            (0.5 - x) *
+            bounds.maxX * 2;
+
+            keyboardY =
+            (0.5 - y) *
+            bounds.maxY * 2;
+
+            updateActivityImage();
+
+        }
+    );
+
+    activityImageContainer.addEventListener(
+        "mouseleave",
+        ()=>{
+
+            keyboardX = 0;
+            keyboardY = 0;
+
+            updateActivityImage();
+
+        }
+    );
+
+}
+
+/* ============================================= */
+/* KEYBOARD CONTROL */
+/* ============================================= */
+
+document.addEventListener(
+    "keydown",
+    (e)=>{
+
+        const modal =
+        document.getElementById(
+            "activityModal"
+        );
+
+        if(
+            !modal.classList.contains("show")
+        ) return;
+
+        const validKeys = [
+
+            "ArrowLeft",
+            "ArrowRight",
+            "ArrowUp",
+            "ArrowDown",
+
+            "a","d","w","s",
+            "A","D","W","S"
+
+        ];
+
+        if(!validKeys.includes(e.key))
+            return;
+
+        e.preventDefault();
+
+        const step = 80;
+
+        switch(e.key){
+
+            case "ArrowLeft":
+            case "a":
+            case "A":
+                keyboardX += step;
+                break;
+
+            case "ArrowRight":
+            case "d":
+            case "D":
+                keyboardX -= step;
+                break;
+
+            case "ArrowUp":
+            case "w":
+            case "W":
+                keyboardY += step;
+                break;
+
+            case "ArrowDown":
+            case "s":
+            case "S":
+                keyboardY -= step;
+                break;
+        }
+
+        updateActivityImage();
+
+    }
+);
+
+/* ============================================= */
+/* CLOSE MODAL */
+/* ============================================= */
+
+function closeActivityModal(){
+
+    keyboardX = 0;
+    keyboardY = 0;
+
+    document
+    .getElementById("activityModal")
+    .classList.remove("show");
+
+    document.body.style.overflow =
+    "auto";
+
+}
+
+emailjs.init("mYZzCFaPRwJwoybYw");
+
+const form =
+document.getElementById("contactForm");
+
+const cooldownTime = 60000;
+
+form.addEventListener("submit", async (e)=>{
+
+    e.preventDefault();
+
+    const btn =
+    form.querySelector("button");
+
+    const originalHTML =
+    btn.innerHTML;
+
+    const honeypot =
+    document.getElementById("website").value;
+
+    if(honeypot){
+        return;
+    }
+
+    const lastSent =
+    localStorage.getItem("lastContact");
+
+    if(
+        lastSent &&
+        Date.now() - lastSent < cooldownTime
+    ){
+
+        alert(
+            "Please wait 1 minute before sending another message."
+        );
+
+        return;
+    }
+
+    btn.disabled = true;
+
+    btn.innerHTML =
+    '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+    try{
+
+        await emailjs.send(
+
+            "zharvian11",
+
+            "template_nz5hpyw",
+
+            {
+
+                name:
+                document.getElementById("name").value,
+
+                email:
+                document.getElementById("email").value,
+
+                reply_to: 
+                document.getElementById("email").value,
+
+                subject:
+                document.getElementById("subject").value,
+
+                message:
+                document.getElementById("message").value
+
+            }
+
+        );
+
+        localStorage.setItem(
+            "lastContact",
+            Date.now()
+        );
+
+        btn.innerHTML =
+        '<i class="fa-solid fa-circle-check"></i> Message Sent';
+
+        form.reset();
+
+    }
+
+    catch(error){
+
+        console.error("EMAILJS ERROR:", error);
+
+        alert(JSON.stringify(error));
+
+        btn.innerHTML =
+        '<i class="fa-solid fa-triangle-exclamation"></i> Failed';
+
+    }
+
+    setTimeout(()=>{
+
+        btn.disabled = false;
+
+        btn.innerHTML = originalHTML;
+
+    },3000);
+
+});
+
+const mobileBtn =
+document.getElementById(
+"mobileMenuBtn"
+);
+
+const mobileMenu =
+document.getElementById(
+"mobileMenu"
+);
+
+mobileBtn.addEventListener(
+"click",
+() => {
+
+    mobileMenu.classList.toggle(
+    "active"
+    );
+
+});
+
+document
+.querySelectorAll(
+".mobile-menu a"
+)
+.forEach(link => {
+
+    link.addEventListener(
+    "click",
+    () => {
+
+        mobileMenu.classList.remove(
+        "active"
+        );
+
+    });
+
+});
+
+mobileBtn.addEventListener(
+"click",
+() => {
+
+    mobileMenu.classList.toggle(
+    "active"
+    );
+
+    mobileBtn.innerHTML =
+    mobileMenu.classList.contains(
+    "active"
+    )
+    ?
+    '<i class="fa-solid fa-xmark"></i>'
+    :
+    '<i class="fa-solid fa-bars"></i>';
+
+});
