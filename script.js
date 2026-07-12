@@ -395,14 +395,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const data = {
 
-        award_ml:{
-            image:"assets/achievements/immo.png",
-            title:"Mythical Immortal Competitive Excellence",
-            latin:"双子座",
-            desc:"Awarded for demonstrating outstanding leadership, tactical awareness, resource management, conflict resolution, and high-pressure decision-making capabilities, culminating in the attainment of Mythical Immortal rank within the Mobile Legends competitive ecosystem.",
-            date:"11 June 2026"
-        },
-
         award1:{
             image:"assets/achievements/navi.png",
             title:"NAVI Esports Community Editing Finalist",
