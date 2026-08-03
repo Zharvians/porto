@@ -1,6 +1,32 @@
 const activities = [
 
 {
+    title:"First Day of Internship at the Communication and Informatics Office",
+
+    date:"August 3, 2026",
+
+    image:"assets/activities/a9.png",
+
+    category:"Internship | Public Information",
+
+    location:"South Kalimantan Provincial Communication and Informatics Office",
+
+    photographer:"Muhammad Ade Ramadhani",
+
+    desc:"Started an internship program in the Public Information Division at the South Kalimantan Provincial Communication and Informatics Office. The first day focused on workplace orientation, understanding the organization's workflow, and observing how government information, news publications, documentation, and digital media are managed to support public communication.",
+
+    details:[
+        "Participated in workplace orientation and onboarding",
+        "Learned the organizational structure of the Public Information Division",
+        "Observed the government news publication workflow",
+        "Reviewed the official website and social media platforms",
+        "Adapted to the office environment and team collaboration",
+        "Prepared personal equipment for internship activities",
+        "Gained an overview of internship responsibilities and objectives"
+    ]
+},
+
+{
     title:"NDBI Spatial Analysis of Urban Expansion in Sungai Andai",
 
     date:"May 19, 2026",
